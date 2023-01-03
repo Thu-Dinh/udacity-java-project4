@@ -34,6 +34,7 @@ public class OrderController {
 
     @PostMapping("/submit/{username}")
     public ResponseEntity<UserOrder> submit(@PathVariable String username) {
+        logger.info("Start create order ");
         User user = userRepository.findByUsername(username);
         if (user == null) {
             logger.error("Error create order. Cannot found username {}", username);
@@ -41,7 +42,7 @@ public class OrderController {
         }
         UserOrder order = UserOrder.createFromCart(user.getCart());
         order = orderRepository.save(order);
-        logger.info("Create order successfully with id {}", order.getId());
+        logger.info("End create order ");
 
         return ResponseEntity.ok(order);
     }
