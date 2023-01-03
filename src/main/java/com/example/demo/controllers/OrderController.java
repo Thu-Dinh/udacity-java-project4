@@ -41,7 +41,7 @@ public class OrderController {
             return ResponseEntity.notFound().build();
         }
         UserOrder order = UserOrder.createFromCart(user.getCart());
-        order = orderRepository.save(order);
+        orderRepository.save(order);
         logger.info("End create order ");
 
         return ResponseEntity.ok(order);
